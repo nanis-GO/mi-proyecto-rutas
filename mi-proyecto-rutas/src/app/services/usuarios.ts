@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UsuariosService {
-  // URL Correcta: https://jsonplaceholder.typicode.com/users
   private api = 'https://jsonplaceholder.typicode.com/users';
 
   constructor(private http: HttpClient) {}
 
-  listar() {
+  listar(): Observable<any[]> {
     return this.http.get<any[]>(this.api);
   }
 }

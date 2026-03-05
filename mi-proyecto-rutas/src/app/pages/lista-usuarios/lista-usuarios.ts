@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuariosService } from '../../services/usuarios';
 
@@ -11,18 +11,27 @@ import { UsuariosService } from '../../services/usuarios';
 export class ListaUsuariosComponent implements OnInit {
   usuarios: any[] = [];
   error: string = '';
-
-  constructor(private srv: UsuariosService) {}
+  
+  // Inyectamos el detector de cambios
+  private cdr = inject(ChangeDetectorRef);
+  private srv = inject(UsuariosService);
 
   ngOnInit() {
+    this.cargarUsuarios();
+  }
+
+  cargarUsuarios() {
     this.srv.listar().subscribe({
       next: (data) => {
         this.usuarios = data;
-        this.error = ''; 
+        this.error = '';
+        // ¡ESTO ES LO IMPORTANTE!
+        // Le dice a Angular: "¡Ey! ya tengo los datos, dibuja la tabla AHORA"
+        this.cdr.detectChanges(); 
       },
-      error: () => {
-        this.usuarios = [];
-        this.error = 'No se pudo cargar usuarios de la API';
+      error: (e) => {
+        this.error = 'Error al conectar con la API';
+        this.cdr.detectChanges();
       }
     });
   }

@@ -1,0 +1,49 @@
+<div style="display: flex; justify-content: center; align-items: center; min-height: 80vh; width: 100%;">
+  
+  <div style="width: 100%; max-width: 400px; background: #1f1f1f; padding: 30px; border-radius: 8px; color: white; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+    <h2 style="color: #bb86fc; text-align: center; margin-bottom: 20px;">REGISTRO</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; color: #03dac6; margin-bottom: 5px;">Nombre</label>
+        <input formControlName="nombre" placeholder="Mínimo 3 letras" 
+               style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; background: #2c2c2c; color: white;">
+        
+        <div *ngIf="form.get('nombre')?.touched && form.get('nombre')?.invalid" style="color: #ff5252; font-size: 12px; margin-top: 5px;">
+          <small *ngIf="form.get('nombre')?.errors?.['required']">El nombre es obligatorio.</small>
+          <small *ngIf="form.get('nombre')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</small>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 15px;">
+        <label style="display: block; color: #03dac6; margin-bottom: 5px;">Email</label>
+        <input formControlName="email" type="email" placeholder="ejemplo@correo.com"
+               style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; background: #2c2c2c; color: white;">
+        
+        <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" style="color: #ff5252; font-size: 12px; margin-top: 5px;">
+          <small *ngIf="form.get('email')?.errors?.['required']">El correo es obligatorio.</small>
+          <small *ngIf="form.get('email')?.errors?.['email']">Formato de correo no válido.</small>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <label style="display: block; color: #03dac6; margin-bottom: 5px;">Contraseña</label>
+        <input formControlName="password" type="password" placeholder="Mínimo 6 caracteres"
+               style="width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #333; background: #2c2c2c; color: white;">
+        
+        <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" style="color: #ff5252; font-size: 12px; margin-top: 5px;">
+          <small *ngIf="form.get('password')?.errors?.['required']">La contraseña es obligatoria.</small>
+          <small *ngIf="form.get('password')?.errors?.['minlength']">Debe tener al menos 6 caracteres.</small>
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="form.invalid" 
+              [style.background]="form.invalid ? '#444' : '#03dac6'"
+              style="width: 100%; padding: 12px; border: none; border-radius: 4px; color: black; font-weight: bold; cursor: pointer; text-transform: uppercase;">
+        {{ form.invalid ? 'Llenar campos' : 'Registrarse' }}
+      </button>
+
+    </form>
+  </div>
+</div>
