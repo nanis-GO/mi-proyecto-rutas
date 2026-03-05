@@ -1,0 +1,28 @@
+/* Estilos globales con degradado de fondo */
+body {
+  /* Fondo degradado: de morado oscuro (#2d005e) a negro puro (#000000) */
+  background: linear-gradient(180deg, #800792 0%, #000000 100%);
+  color: #e0e0e0; /* Texto gris claro para que se lea bien */
+ font-family: "Barlow", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+  margin: 0;
+  min-height: 100vh; /* Asegura que el degradado cubra toda la pantalla */
+}
+
+h1, h2 {
+  color: #bb86fc; /* Morado neón para títulos */
+}
+
+/* Estilo para los enlaces del menú */
+a {
+  color: #cc8aff; /* Turquesa para enlaces */
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+a:hover {
+  color: #bb86fc;
+  text-shadow: 0 0 5px #bb86fc;
+}
